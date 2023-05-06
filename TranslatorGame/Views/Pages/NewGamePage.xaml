@@ -1,0 +1,106 @@
+﻿<ui:UiPage xmlns:Controls="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui" 
+           x:Class="TranslatorGame.Views.Pages.NewGamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TranslatorGame.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+           Title="NewGamePage"
+    d:DataContext="{d:DesignInstance local:NewGamePage, IsDesignTimeCreatable=False}"
+    d:DesignWidth="1661.328"
+    d:Background="{DynamicResource ApplicationBackgroundBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d" Height="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewModel.LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <ui:UiPage.Resources>
+        <ResourceDictionary 
+            Source="pack://application:,,,/TranslatorGame;component/Views/Dictionaries/StylesDictionary.xaml"/>
+    </ui:UiPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <WrapPanel Grid.Row="0" Grid.Column="0">
+            <Button
+                Content="Назад" 
+                Width="150"   
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="0,0,250,0"
+                Command="{Binding ViewModel.BackToChoiceCategoryCommand}"
+                Style="{StaticResource buttonStyle}"/>
+            <TextBlock Text="{Binding ViewModel.GameIsDone}" 
+                       Style="{StaticResource textBlockStyle}"/>
+        </WrapPanel>
+        <Button Grid.Row="1" 
+                Grid.Column="0"
+                Width="600" 
+                Height="300" 
+                VerticalAlignment="Top"            
+                Style="{StaticResource buttonTemplate}">
+            <Image Grid.Row="1"
+                   Width="550"
+                   Height="250"
+                   Source="{Binding ViewModel.OutputImage}"
+                   Stretch="UniformToFill"/>
+        </Button>
+
+        <Button
+            Content="{Binding ViewModel.QuessWord}"
+            Grid.Row="2"
+            Grid.Column="0"
+            Width="200"  
+            VerticalAlignment="Top"
+            Style="{StaticResource buttonStyle}"/>
+
+        <WrapPanel VerticalAlignment="Top" 
+                   Grid.Row="3" 
+                   Grid.Column="0"
+                   Width="450">
+            <Button
+                Content="{Binding ViewModel.AnswerFirstButton}"
+                Width="200" 
+                Height="50"
+                Margin="10"
+                Background="{Binding ViewModel.ColorAnswer}"
+                Command="{Binding ViewModel.CheckAnswerCommand}"
+                CommandParameter="{Binding ViewModel.AnswerFirstButton}"/>
+            <Button 
+                Content="{Binding ViewModel.AnswerSecondButton}"
+                Width="200" 
+                Height="50"
+                Margin="10"
+                Background="{Binding ViewModel.ColorAnswer}"
+                Command="{Binding ViewModel.CheckAnswerCommand}"
+                CommandParameter="{Binding ViewModel.AnswerSecondButton}"/>
+            <Button
+                Content="{Binding ViewModel.AnswerThirdButton}"
+                 Width="200" 
+                Height="50"
+                Margin="10"
+                Background="{Binding ViewModel.ColorAnswer}"
+                Command="{Binding ViewModel.CheckAnswerCommand}"
+                CommandParameter="{Binding ViewModel.AnswerThirdButton}"/>
+            <Button
+                Content="{Binding ViewModel.AnswerFourthButton}"
+                Width="200" 
+                Height="50"
+                Margin="10"
+                Background="{Binding ViewModel.ColorAnswer}"
+                Command="{Binding ViewModel.CheckAnswerCommand}"
+                CommandParameter="{Binding ViewModel.AnswerFourthButton}"/>
+        </WrapPanel>
+    </Grid>
+</ui:UiPage>
