@@ -17,7 +17,7 @@ namespace TranslatorGame.Models.ValueObjects
             }
             if (!IsPassword(value))
             {
-                throw new ArgumentException("Пароль задан некорректно!");
+                throw new ArgumentException("Пароль задан некорректно. Он должен содеражать...");
             }
             Value = value;
         }

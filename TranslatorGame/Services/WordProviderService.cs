@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using TranslatorGame.Models;
 
-namespace TranslatorGame.Models
+namespace TranslatorGame.Services
 {
-    public class WordProvider : IAsyncEnumerable<Word>, IEnumerable<Word>
+    public class WordProviderService : IAsyncEnumerable<Word>, IEnumerable<Word>
     {
         private readonly (List<Word> list, double prob)[] _lists;
 
-        public WordProvider(params (List<Word> list, double prob)[] lists)
+        public WordProviderService(params (List<Word> list, double prob)[] lists)
         {
             _lists = lists;
         }

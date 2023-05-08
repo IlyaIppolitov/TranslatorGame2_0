@@ -8,7 +8,6 @@ using TranslatorGame.Views.Pages;
 using TranslatorGame.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using TranslatorGame.Messages;
-using System.Windows;
 
 namespace TranslatorGame.ViewModels
 {
@@ -31,7 +30,6 @@ namespace TranslatorGame.ViewModels
         {
             _languageGameService = languageGameService;
             _navigationService = navigationService;
-            //RegisterMessage(); 
         }
 
         #region Комманды
@@ -66,11 +64,7 @@ namespace TranslatorGame.ViewModels
             _navigationService.Navigate(typeof(RegistrationPage));
         }
         #endregion
-        private void Clear()
-        {
-            Login = string.Empty;
-            Password = string.Empty;
-        }
+
         private void RegisterMessage()
         {
             WeakReferenceMessenger.Default.Register<LoginRequestMessage>(this, (r, m) =>

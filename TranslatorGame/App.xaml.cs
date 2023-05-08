@@ -50,9 +50,10 @@ namespace TranslatorGame
 
                 services.AddDbContext<GameDbContext>(options =>
                 {
-                    options.UseSqlite("DataSource = D:\\ITStep\\CSharp\\EFCore\\TranslatorGame2_0\\TranslatorGame\\LanguageGames.db");
-                    //options.UseSqlite("DataSource = C:\\Users\\79053\\Desktop\\Документы\\TranslatorGame\\TranslatorGame\\LanguageGames.db");
-                });              
+                    //options.UseSqlite("DataSource = D:\\ITStep\\CSharp\\EFCore\\TranslatorGame2_0\\TranslatorGame\\LanguageGames.db");
+                    options.UseSqlite("DataSource = C:\\Users\\79053\\Desktop\\Документы\\TranslatorGame\\TranslatorGame\\LanguageGames.db");
+                });      
+                
 
                 // Main window with navigation
                 services.AddScoped<INavigationWindow, Views.Windows.MainWindow>();

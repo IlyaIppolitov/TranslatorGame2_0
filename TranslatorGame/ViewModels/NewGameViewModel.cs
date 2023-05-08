@@ -20,11 +20,12 @@ namespace TranslatorGame.ViewModels
     {
         #region Поля
         private IEnumerator<Word> _enumerator;
-        private WordProvider _provider;
+        private WordProviderService _provider;
         private List<Word> _dictionaryWords;
         private List<Word> _playerWords;
         private string _playerLogin;
         private int _rightNumber;
+
         private LanguageOptions _language;
         private string _category;
         private readonly LanguageGameService _languageGameService;
@@ -91,7 +92,7 @@ namespace TranslatorGame.ViewModels
             _dictionaryWords = await _languageGameService.GetWordByCategoryAsync(_category);
             _playerWords = await _languageGameService.GetPlayerWords(_playerLogin, _category);
 
-            _provider = new WordProvider(new[]
+            _provider = new WordProviderService(new[]
             {
                 (_dictionaryWords, 1.0),
                 (_playerWords, 0.6)

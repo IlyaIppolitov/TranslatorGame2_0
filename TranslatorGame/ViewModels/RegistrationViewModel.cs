@@ -39,29 +39,36 @@ namespace TranslatorGame.ViewModels
         [RelayCommand]
         private async Task CreateAccount()
         {
-            if (string.IsNullOrWhiteSpace(NewLogin) || string.IsNullOrWhiteSpace(NewPassword)
-                || string.IsNullOrWhiteSpace(NewPasswordCheck))
+            try
             {
-                UserAdded = "Заполните все поля"; 
+                if (string.IsNullOrWhiteSpace(NewLogin) || string.IsNullOrWhiteSpace(NewPassword)
+                    || string.IsNullOrWhiteSpace(NewPasswordCheck))
+                {
+                    UserAdded = "Заполните все поля";
+                }
+                else if (_languageGameService.CheckPlayerExists(NewLogin))
+                {
+                    UserAdded = string.Empty;
+                    LoginIsExist = "Пользователь с таким логином уже существует";
+                }
+                else if (NewPassword != NewPasswordCheck)
+                {
+                    UserAdded = string.Empty;
+                    PasswordsIsNotMatch = "Пароли не совпадают";
+                }
+                else
+                {
+                    await _languageGameService.AddNewPlayer(NewLogin, NewPassword);
+                    PasswordsIsNotMatch = string.Empty;
+                    UserAdded = "Пользователь добавлен";
+                    await Task.Delay(TimeSpan.FromSeconds(3));
+                    Clear();
+                    _navigationService.Navigate(typeof(AutorizationPage));
+                }
             }
-            else if (_languageGameService.CheckPlayerExists(NewLogin))
+            catch (ArgumentException ex)
             {
-                UserAdded = string.Empty;
-                LoginIsExist = "Пользователь с таким логином уже существует";
-            }
-            else if (NewPassword != NewPasswordCheck)
-            {
-                UserAdded = string.Empty; 
-                PasswordsIsNotMatch = "Пароли не совпадают";
-            }
-            else
-            {
-                await _languageGameService.AddNewPlayer(NewLogin, NewPassword);
-                PasswordsIsNotMatch = string.Empty; 
-                UserAdded = "Пользователь добавлен";
-                await Task.Delay(TimeSpan.FromSeconds(3));
-                Clear(); 
-                _navigationService.Navigate(typeof(AutorizationPage));
+                PasswordsIsNotMatch = ex.Message; 
             }
         }
         [RelayCommand]
