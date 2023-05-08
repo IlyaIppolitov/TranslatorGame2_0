@@ -141,6 +141,8 @@ namespace TranslatorGame.ViewModels
                 GameIsDone = "Молодец! Ты прошёл все слова в этой категории!";
                 await Task.Delay(TimeSpan.FromSeconds(5));
                 _navigationService.Navigate(typeof(CategoryGamePage));
+                GameIsDone = string.Empty; 
+                return; 
             }
 
             QuessWord = QWord.Russian!;
