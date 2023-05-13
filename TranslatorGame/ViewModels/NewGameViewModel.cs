@@ -105,15 +105,19 @@ namespace TranslatorGame.ViewModels
         [RelayCommand]
         private void BackToChoiceCategory() => _navigationService.Navigate(typeof(CategoryGamePage));
         [RelayCommand]
-        private async Task CheckAnswer(object p)
+        private async Task CheckAnswer(object parameter)
         {
-            if (p is string answer)
+            if (parameter is string answer)
             {
                 if (string.IsNullOrEmpty(answer))
                     throw new NullReferenceException(nameof(answer));
                 if (string.IsNullOrWhiteSpace(answer))
                     throw new ArgumentNullException(nameof(answer));
                 Content = answer;
+            }
+            else
+            { 
+                //нужно выбросить исключение
             }
 
             if (await CheckRightButton(Content))

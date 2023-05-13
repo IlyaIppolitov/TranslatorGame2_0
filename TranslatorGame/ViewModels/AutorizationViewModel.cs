@@ -8,6 +8,8 @@ using TranslatorGame.Views.Pages;
 using TranslatorGame.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using TranslatorGame.Messages;
+using Wpf.Ui.Controls;
+using System;
 
 namespace TranslatorGame.ViewModels
 {
@@ -20,8 +22,8 @@ namespace TranslatorGame.ViewModels
         [ObservableProperty]
         private string _login;
         [ObservableProperty]
-        private string _password; 
-         [ObservableProperty]
+        private string _password;
+        [ObservableProperty]
         private string _userIsNotFound;
         #endregion
 
@@ -34,8 +36,18 @@ namespace TranslatorGame.ViewModels
 
         #region Комманды
         [RelayCommand]
-        private async Task ComeInAccount()
+        private async Task ComeInAccount(object parameter)
         {
+            if (parameter is PasswordBox passwordBox)
+            {
+                if(passwordBox is null) throw new NullReferenceException(nameof(parameter));
+                Password = passwordBox.Password;
+            }
+            else
+            {
+                throw new InvalidCastException($"Не удалось выполнить преобразование {nameof(passwordBox)}");
+            }
+
             if (string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(Login))
             {
                 UserIsNotFound = "Неверный логин и/или пароль";
