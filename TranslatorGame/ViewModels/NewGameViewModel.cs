@@ -116,8 +116,9 @@ namespace TranslatorGame.ViewModels
                 Content = answer;
             }
             else
-            { 
-                //нужно выбросить исключение
+            {
+                throw new InvalidCastException
+                    ($"Не удалось выполнить преобразование{nameof(parameter)}");
             }
 
             if (await CheckRightButton(Content))

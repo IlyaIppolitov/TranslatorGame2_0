@@ -45,7 +45,8 @@ namespace TranslatorGame.ViewModels
             }
             else
             {
-                throw new InvalidCastException($"Не удалось выполнить преобразование {nameof(passwordBox)}");
+                throw new InvalidCastException
+                    ($"Не удалось выполнить преобразование {nameof(passwordBox)}");
             }
 
             if (string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(Login))
